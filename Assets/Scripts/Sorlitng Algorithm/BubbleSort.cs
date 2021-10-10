@@ -6,6 +6,7 @@ public class BubbleSort : SortingAlgorith
     public override void Sort(int[] array)
     {
         BubbleSorting(array);
+        DisplayArray(array, "bubbleSort");
     }
 
     private void BubbleSorting(int[] array)
@@ -21,6 +22,5 @@ public class BubbleSort : SortingAlgorith
                     exchange(array, i, i + 1);
             }
         }
-        Debug.Log($"Bubble { array }");
     }
 }

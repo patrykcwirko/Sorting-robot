@@ -6,6 +6,7 @@ public class QuickSort : SortingAlgorith
     public override void Sort(int[] array)
     {
         QuickSorting(array, 0, array.Length - 1);
+        DisplayArray(array, "QuickSort");
     }
 
     private void QuickSorting(int[] array, int start, int end)
@@ -18,8 +19,6 @@ public class QuickSort : SortingAlgorith
             QuickSorting(array, start, i - 1);
             QuickSorting(array, i + 1, end);
         }
-
-        Debug.Log($"Sort { array }");
     }
 
     private int Partition(int[] array, int start, int end)

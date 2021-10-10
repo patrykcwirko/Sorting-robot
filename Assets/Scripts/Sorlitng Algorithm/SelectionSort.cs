@@ -6,6 +6,7 @@ public class SelectionSort : SortingAlgorith
     public override void Sort(int[] array)
     {
         SelectionSorting(array);
+        DisplayArray(array, "SelectionSort");
     }
 
     private void SelectionSorting(int[] array)
@@ -19,7 +20,6 @@ public class SelectionSort : SortingAlgorith
             if (i != k)
                 exchange(array, i, k);
         }
-        Debug.Log($"Selection { array }");
     }
 
     private int MinValue(int[] data, int start)

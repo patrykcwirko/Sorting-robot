@@ -13,4 +13,16 @@ public abstract class SortingAlgorith : ScriptableObject
         data[n] = tmp;
     }
 
+    public void DisplayArray(int[] data, string name)
+    {
+        string massage = name + ": ";
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            massage += data[i].ToString() + ", ";
+        }
+
+        Debug.Log(massage);
+    }
+
 }

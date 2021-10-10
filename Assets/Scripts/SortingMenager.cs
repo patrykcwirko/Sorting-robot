@@ -5,15 +5,16 @@ public class SortingMenager : MonoBehaviour
 {
     [SerializeField] private SortingAlgorith[] algoriths;
 
-    private void Start()
+    public void StartAlgorith(int index)
     {
         int[] array = GenerateArray(10, 0, 100);
-        Debug.Log($"UnSort { array }");
+        algoriths[0].DisplayArray(array, "UnSort");
+        algoriths[index].Sort(array);
+    }
 
-        for (int i = 0; i < algoriths.Length; i++)
-        {
-            algoriths[i].Sort(array);
-        }
+    public void ExitApp()
+    {
+        Application.Quit();
     }
 
     private int[] GenerateArray(int length, int minValue, int maxValue)
