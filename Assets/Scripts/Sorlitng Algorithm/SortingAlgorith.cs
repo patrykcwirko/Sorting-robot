@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class SortingAlgorith : ScriptableObject
 {
-    public abstract void Sort(int[] array);
+    public abstract float Sort(int[] array);
 
     protected static void exchange(int[] data, int m, int n)
     {

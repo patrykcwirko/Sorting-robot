@@ -3,10 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Sorting Algorith/SelectionSort")]
 public class SelectionSort : SortingAlgorith
 {
-    public override void Sort(int[] array)
+    public override float Sort(int[] array)
     {
+        float startTime = Time.time;
         SelectionSorting(array);
         DisplayArray(array, "SelectionSort");
+        return Time.time - startTime;
     }
 
     private void SelectionSorting(int[] array)

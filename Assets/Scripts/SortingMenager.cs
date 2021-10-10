@@ -7,9 +7,10 @@ public class SortingMenager : MonoBehaviour
 
     public void StartAlgorith(int index)
     {
-        int[] array = GenerateArray(10, 0, 100);
+        int[] array = GameManager.instance.GetArrayOfNumber();
         algoriths[0].DisplayArray(array, "UnSort");
-        algoriths[index].Sort(array);
+        float time = algoriths[index].Sort(array);
+        Debug.Log(time);
     }
 
     public void ExitApp()

@@ -3,10 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Sorting Algorith/QuickSort")]
 public class QuickSort : SortingAlgorith
 {
-    public override void Sort(int[] array)
+    public override float Sort(int[] array)
     {
+        float startTime = Time.time;
         QuickSorting(array, 0, array.Length - 1);
         DisplayArray(array, "QuickSort");
+        return Time.time - startTime;
     }
 
     private void QuickSorting(int[] array, int start, int end)
