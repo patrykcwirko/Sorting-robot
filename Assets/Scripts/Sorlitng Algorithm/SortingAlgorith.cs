@@ -3,7 +3,6 @@ using UnityEngine;
 
 public abstract class SortingAlgorith : ScriptableObject
 {
-    public float time;
     public abstract IEnumerator Sort(int[] array);
 
     protected IEnumerator exchange(int[] data, int m, int n)

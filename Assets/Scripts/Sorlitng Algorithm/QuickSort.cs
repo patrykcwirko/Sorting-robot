@@ -8,10 +8,9 @@ public class QuickSort : SortingAlgorith
 
     public override IEnumerator Sort(int[] array)
     {
-        float startTime = Time.time;
+        GameManager.instance.GetTimer().StartTimer();
         yield return QuickSorting(array, 0, array.Length - 1);
         DisplayArray(array, "QuickSort");
-        time = Time.time - startTime;
     }
 
     private IEnumerator QuickSorting(int[] array, int start, int end)
@@ -40,6 +39,7 @@ public class QuickSort : SortingAlgorith
                 stack[++top] = end;
             }
         }
+        GameManager.instance.GetTimer().EndTimer();
     }
 
     private IEnumerator Partition(int[] array, int start, int end)

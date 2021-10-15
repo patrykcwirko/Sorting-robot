@@ -10,7 +10,6 @@ public class SortingMenager : MonoBehaviour
         int[] array = GameManager.instance.GetArrayOfNumber();
         algoriths[0].DisplayArray(array, "UnSort");
         StartCoroutine( algoriths[index].Sort(array));
-        Debug.Log(algoriths[index].time);
     }
 
     public void ExitApp()

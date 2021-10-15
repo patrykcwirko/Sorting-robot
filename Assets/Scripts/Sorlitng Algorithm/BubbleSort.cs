@@ -6,10 +6,9 @@ public class BubbleSort : SortingAlgorith
 {
     public override IEnumerator Sort(int[] array)
     {
-        float startTime = Time.time;
+        GameManager.instance.GetTimer().StartTimer();
         yield return BubbleSorting(array);
         DisplayArray(array, "bubbleSort");
-        time = Time.time - startTime;
     }
 
     private IEnumerator BubbleSorting(int[] array)
@@ -25,5 +24,6 @@ public class BubbleSort : SortingAlgorith
                     yield return exchange(array, i, i + 1);
             }
         }
+        GameManager.instance.GetTimer().EndTimer();
     }
 }

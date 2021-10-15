@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private RobotController robot;
+    [SerializeField] private Timer timer;
     [SerializeField] private int arraySortSize = 10;
     [SerializeField] private int minimumValue = 0;
     [SerializeField] private int maximumValue = 100;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     public int[] GetArrayOfNumber() { return _arrayOfNumber; }
     public RobotController GetRobot() { return robot; }
+    public Timer GetTimer() { return timer; }
 
     private void PreperScene()
     {

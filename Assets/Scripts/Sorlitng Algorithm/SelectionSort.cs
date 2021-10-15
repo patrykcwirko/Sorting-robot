@@ -6,11 +6,9 @@ public class SelectionSort : SortingAlgorith
 {
     public override IEnumerator Sort(int[] array)
     {
-        time = 0;
-        float startTime = Time.time;
+        GameManager.instance.GetTimer().StartTimer();
         yield return SelectionSorting(array);
         DisplayArray(array, "SelectionSort");
-        time = Time.time - startTime;
     }
 
     private IEnumerator SelectionSorting(int[] array)
@@ -24,6 +22,7 @@ public class SelectionSort : SortingAlgorith
             if (i != k)
                 yield return exchange(array, i, k);
         }
+        GameManager.instance.GetTimer().EndTimer();
     }
 
     private int MinValue(int[] data, int start)
