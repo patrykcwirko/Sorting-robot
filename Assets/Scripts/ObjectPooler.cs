@@ -6,7 +6,7 @@ public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler instance;
 
-    private Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
+    [SerializeField] private Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
 
     private void Awake()
     {

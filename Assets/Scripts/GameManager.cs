@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] private ObjectPooler pooler;
     [SerializeField] private RobotController robot;
     [SerializeField] private Timer timer;
     [SerializeField] private int arraySortSize = 10;
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float ballOffset = 0.5f;
 
     private int[] _arrayOfNumber;
+    private List<GameObject> _gameObjectsList;
+    private bool _prepared = false;
 
     private void Awake()
     {
@@ -24,27 +28,44 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _arrayOfNumber = GenerateArray(arraySortSize, minimumValue, maximumValue);
-        ObjectPooler.instance.CreateObjects(spherePrefab, spherInPooler);
+        pooler.CreateObjects(spherePrefab, spherInPooler);
         PreperScene();
     }
 
     public int[] GetArrayOfNumber() { return _arrayOfNumber; }
+    public List<GameObject> GetObjectList() { return _gameObjectsList; }
     public RobotController GetRobot() { return robot; }
     public Timer GetTimer() { return timer; }
 
-    private void PreperScene()
+    public void Reset()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void PreperScene()
     {
         GameObject newObject;
+        _gameObjectsList = new List<GameObject>();
+        _arrayOfNumber = GenerateArray(arraySortSize, minimumValue, maximumValue);
         float positionX = 0 - (arraySortSize / 2);
         platform.transform.localScale = new Vector3(arraySortSize, platform.transform.localScale.y, platform.transform.localScale.z);
+        if(_prepared)
+        {
+            for (int i = 0; i < arraySortSize; i++)
+            {
+                pooler.ReturnGameObject(spherePrefab);
+            }
+        }
         for (int i = 0; i < arraySortSize; i++)
         {
-            newObject = ObjectPooler.instance.GetObject(spherePrefab);
+            newObject = pooler.GetObject(spherePrefab);
+            Debug.Log(newObject.transform.position);
             newObject.transform.position = new Vector3(positionX + ballOffset + i, 1, 0);
             newObject.GetComponent<BallController>().text.text = _arrayOfNumber[i].ToString();
+            _gameObjectsList.Add(newObject);
         }
         robot.PrepareRobot(arraySortSize);
+        _prepared = true;
     }
 
     private int[] GenerateArray(int length, int minValue, int maxValue)
