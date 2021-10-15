@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] private RobotController robot;
     [SerializeField] private int arraySortSize = 10;
     [SerializeField] private int minimumValue = 0;
     [SerializeField] private int maximumValue = 100;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int[] GetArrayOfNumber() { return _arrayOfNumber; }
+    public RobotController GetRobot() { return robot; }
 
     private void PreperScene()
     {
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
             newObject.transform.position = new Vector3(positionX + ballOffset + i, 1, 0);
             newObject.GetComponent<BallController>().text.text = _arrayOfNumber[i].ToString();
         }
+        robot.PrepareRobot(arraySortSize);
     }
 
     private int[] GenerateArray(int length, int minValue, int maxValue)

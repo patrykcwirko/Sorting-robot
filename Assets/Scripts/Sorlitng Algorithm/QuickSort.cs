@@ -1,31 +1,49 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Sorting Algorith/QuickSort")]
 public class QuickSort : SortingAlgorith
 {
-    public override float Sort(int[] array)
+    private int index;
+
+    public override IEnumerator Sort(int[] array)
     {
         float startTime = Time.time;
-        QuickSorting(array, 0, array.Length - 1);
+        yield return QuickSorting(array, 0, array.Length - 1);
         DisplayArray(array, "QuickSort");
-        return Time.time - startTime;
+        time = Time.time - startTime;
     }
 
-    private void QuickSorting(int[] array, int start, int end)
+    private IEnumerator QuickSorting(int[] array, int start, int end)
     {
-        int i;
-        if (start < end)
-        {
-            i = Partition(array, start, end);
+        int[] stack = new int[end - start + 1];
+        int top = -1;
+        stack[++top] = start;
+        stack[++top] = end;
 
-            QuickSorting(array, start, i - 1);
-            QuickSorting(array, i + 1, end);
+        while (top >= 0)
+        {
+            end = stack[top--];
+            start = stack[top--];
+
+            yield return Partition(array, start, end);
+
+            if (index - 1 > start)
+            {
+                stack[++top] = start;
+                stack[++top] = index - 1;
+            }
+
+            if (index + 1 < end)
+            {
+                stack[++top] = index + 1;
+                stack[++top] = end;
+            }
         }
     }
 
-    private int Partition(int[] array, int start, int end)
+    private IEnumerator Partition(int[] array, int start, int end)
     {
-        int temp;
         int p = array[end];
         int i = start - 1;
 
@@ -34,15 +52,11 @@ public class QuickSort : SortingAlgorith
             if (array[j] <= p)
             {
                 i++;
-                temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
+                yield return exchange(array, i, j);
             }
         }
 
-        temp = array[i + 1];
-        array[i + 1] = array[end];
-        array[end] = temp;
-        return i + 1;
+        yield return exchange(array, i+1, end);
+        index = i + 1;
     }
 }

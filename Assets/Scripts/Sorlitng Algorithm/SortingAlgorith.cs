@@ -1,13 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class SortingAlgorith : ScriptableObject
 {
-    public abstract float Sort(int[] array);
+    public float time;
+    public abstract IEnumerator Sort(int[] array);
 
-    protected static void exchange(int[] data, int m, int n)
+    protected IEnumerator exchange(int[] data, int m, int n)
     {
         int tmp;
 
+        yield return GameManager.instance.GetRobot().SwapBall(m, n);
         tmp = data[m];
         data[m] = data[n];
         data[n] = tmp;

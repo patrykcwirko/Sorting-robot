@@ -1,17 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Sorting Algorith/BubbleSort")]
 public class BubbleSort : SortingAlgorith
 {
-    public override float Sort(int[] array)
+    public override IEnumerator Sort(int[] array)
     {
         float startTime = Time.time;
-        BubbleSorting(array);
+        yield return BubbleSorting(array);
         DisplayArray(array, "bubbleSort");
-        return Time.time - startTime;
+        time = Time.time - startTime;
     }
 
-    private void BubbleSorting(int[] array)
+    private IEnumerator BubbleSorting(int[] array)
     {
         int i, j;
         int N = array.Length;
@@ -21,7 +22,7 @@ public class BubbleSort : SortingAlgorith
             for (i = 0; i < j; i++)
             {
                 if (array[i] > array[i + 1])
-                    exchange(array, i, i + 1);
+                    yield return exchange(array, i, i + 1);
             }
         }
     }

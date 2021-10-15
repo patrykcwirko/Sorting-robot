@@ -1,17 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Sorting Algorith/SelectionSort")]
 public class SelectionSort : SortingAlgorith
 {
-    public override float Sort(int[] array)
+    public override IEnumerator Sort(int[] array)
     {
+        time = 0;
         float startTime = Time.time;
-        SelectionSorting(array);
+        yield return SelectionSorting(array);
         DisplayArray(array, "SelectionSort");
-        return Time.time - startTime;
+        time = Time.time - startTime;
     }
 
-    private void SelectionSorting(int[] array)
+    private IEnumerator SelectionSorting(int[] array)
     {
         int i;
         int N = array.Length;
@@ -20,7 +22,7 @@ public class SelectionSort : SortingAlgorith
         {
             int k = MinValue(array, i);
             if (i != k)
-                exchange(array, i, k);
+                yield return exchange(array, i, k);
         }
     }
 
