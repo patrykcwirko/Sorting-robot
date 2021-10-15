@@ -9,6 +9,7 @@ public abstract class SortingAlgorith : ScriptableObject
     {
         int tmp;
 
+        GameManager.instance.AddSortStep();
         yield return GameManager.instance.GetRobot().SwapBall(m, n);
         tmp = data[m];
         data[m] = data[n];

@@ -4,12 +4,22 @@ using UnityEngine;
 public class SortingMenager : MonoBehaviour
 {
     [SerializeField] private SortingAlgorith[] algoriths;
+    [SerializeField] private TMPro.TextMeshProUGUI countText;
+
+    private int _sortingStep = 0;
 
     public void StartAlgorith(int index)
     {
+        _sortingStep = 0;
         int[] array = GameManager.instance.GetArrayOfNumber();
         algoriths[0].DisplayArray(array, "UnSort");
         StartCoroutine( algoriths[index].Sort(array));
+    }
+
+    public void AddStep()
+    {
+        _sortingStep++;
+        UpdateText();
     }
 
     public void ExitApp()
@@ -17,15 +27,8 @@ public class SortingMenager : MonoBehaviour
         Application.Quit();
     }
 
-    private int[] GenerateArray(int length, int minValue, int maxValue)
+    private void UpdateText()
     {
-        List<int> tmp = new List<int>();
-
-        for (int i = 0; i < length; i++)
-        {
-            tmp.Add(UnityEngine.Random.Range(minValue, maxValue));
-        }
-
-        return tmp.ToArray();
+        countText.text = "Step: " + _sortingStep.ToString();
     }
 }

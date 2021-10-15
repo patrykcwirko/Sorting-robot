@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ObjectPooler pooler;
     [SerializeField] private RobotController robot;
     [SerializeField] private Timer timer;
+    [SerializeField] private SortingMenager sortingMenager;
     [SerializeField] private int arraySortSize = 10;
     [SerializeField] private int minimumValue = 0;
     [SerializeField] private int maximumValue = 100;
@@ -40,6 +41,11 @@ public class GameManager : MonoBehaviour
     public void Reset()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void AddSortStep()
+    {
+        sortingMenager.AddStep();
     }
 
     public void PreperScene()

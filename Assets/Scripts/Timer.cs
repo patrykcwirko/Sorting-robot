@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
 
     private void UpdateText()
     {
-        text.text = _time.ToString();
+        text.text = "Time: " + _time.ToString();
     }
 
 }
